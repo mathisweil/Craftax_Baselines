@@ -18,7 +18,7 @@ from orbax.checkpoint import (
 
 import wandb
 from flax.linen.initializers import constant, orthogonal
-from typing import Sequence, NamedTuple, Dict
+from typing import NamedTuple, Dict
 from flax.training.train_state import TrainState
 import distrax
 import functools
@@ -66,7 +66,7 @@ class ScannedRNN(nn.Module):
 
 
 class ActorCriticRNN(nn.Module):
-    action_dim: Sequence[int]
+    action_dim: int
     config: Dict
 
     @nn.compact
