@@ -9,12 +9,7 @@ import numpy as np
 import optax
 import time
 
-from flax.training import orbax_utils
-from orbax.checkpoint import (
-    PyTreeCheckpointer,
-    CheckpointManagerOptions,
-    CheckpointManager,
-)
+import orbax.checkpoint as ocp
 
 import wandb
 from flax.linen.initializers import constant, orthogonal
@@ -476,17 +471,17 @@ def run_ppo(config):
         def _save_network(rs_index, dir_name):
             train_states = out["runner_state"][rs_index]
             train_state = jax.tree.map(lambda x: x[0], train_states)
-            orbax_checkpointer = PyTreeCheckpointer()
-            options = CheckpointManagerOptions(max_to_keep=1, create=True)
+
             path = os.path.join(wandb.run.dir, dir_name)
-            checkpoint_manager = CheckpointManager(path, orbax_checkpointer, options)
+            options = ocp.CheckpointManagerOptions(max_to_keep=1)
+
+            with ocp.CheckpointManager(path, options=options) as checkpoint_manager:
+                checkpoint_manager.save(
+                    config["TOTAL_TIMESTEPS"],
+                    args=ocp.args.StandardSave(train_state)
+                )
+
             print(f"saved runner state to {path}")
-            save_args = orbax_utils.save_args_from_target(train_state)
-            checkpoint_manager.save(
-                config["TOTAL_TIMESTEPS"],
-                train_state,
-                save_kwargs={"save_args": save_args},
-            )
 
         if config["SAVE_POLICY"]:
             _save_network(0, "policies")
