@@ -477,7 +477,7 @@ def run_ppo(config):
 
             with ocp.CheckpointManager(path, options=options) as checkpoint_manager:
                 checkpoint_manager.save(
-                    config["TOTAL_TIMESTEPS"],
+                    int(config["TOTAL_TIMESTEPS"]),
                     args=ocp.args.StandardSave(train_state)
                 )
 
