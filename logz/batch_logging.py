@@ -14,6 +14,15 @@ def create_log_dict(info, config):
         "episode_length": info["returned_episode_lengths"],
     }
 
+    diffusion_keys = [
+        "loss", "unweighted_loss", "accuracy", "mean_t",
+        "acc_t_low", "acc_t_mid", "acc_t_high", "grad_norm",
+        "action_entropy", "action_unique_frac"
+    ]
+    for k in diffusion_keys:
+        if k in info:
+            to_log[f"diffusion/{k}"] = info[k]
+
     sum_achievements = 0
     for k, v in info.items():
         if "achievements" in k.lower():
@@ -62,6 +71,14 @@ def batch_log(update_step, log, config):
                     "e_mean",
                     "e_std",
                     "rnd_loss",
+                    "diffusion/loss",
+                    "diffusion/unweighted_loss",
+                    "diffusion/accuracy",
+                    "diffusion/acc_t_low",
+                    "diffusion/acc_t_mid",
+                    "diffusion/acc_t_high",
+                    "diffusion/action_entropy",
+                    "diffusion/grad_norm"
                 ]:
                     agg_logs[key] = np.mean(agg)
                 else:
