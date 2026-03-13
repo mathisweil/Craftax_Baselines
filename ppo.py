@@ -15,13 +15,13 @@ from typing import NamedTuple
 from flax.training.train_state import TrainState
 import orbax.checkpoint as ocp
 
-from logz.batch_logging import batch_log, create_log_dict
-from models.actor_critic import (
+from Craftax_Baselines.logz.batch_logging import batch_log, create_log_dict
+from Craftax_Baselines.models.actor_critic import (
     ActorCritic,
     ActorCriticConv,
 )
-from models.icm import ICMEncoder, ICMForward, ICMInverse
-from wrappers import (
+from Craftax_Baselines.models.icm import ICMEncoder, ICMForward, ICMInverse
+from Craftax_Baselines.wrappers import (
     LogWrapper,
     OptimisticResetVecEnvWrapper,
     BatchEnvWrapper,

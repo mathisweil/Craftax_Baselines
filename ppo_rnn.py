@@ -18,13 +18,13 @@ from flax.training.train_state import TrainState
 import distrax
 import functools
 
-from wrappers import (
+from Craftax_Baselines.wrappers import (
     LogWrapper,
     OptimisticResetVecEnvWrapper,
     BatchEnvWrapper,
     AutoResetEnvWrapper,
 )
-from logz.batch_logging import create_log_dict, batch_log
+from Craftax_Baselines.logz.batch_logging import create_log_dict, batch_log
 
 from craftax.craftax_env import make_craftax_env_from_name
 
