@@ -22,7 +22,7 @@ from Craftax_Baselines.wrappers import (
     AutoResetEnvWrapper,
     BatchEnvWrapper,
 )
-from models.rnd import RNDNetwork, ActorCriticRND
+from Craftax_Baselines.models.rnd import RNDNetwork, ActorCriticRND
 
 # Code adapted from the original implementation made by Chris Lu
 # Original code located at https://github.com/luchris429/purejaxrl
