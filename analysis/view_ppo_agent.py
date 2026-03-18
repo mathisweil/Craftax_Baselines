@@ -11,7 +11,7 @@ from craftax.environment_base.wrappers import AutoResetEnvWrapper
 from flax.training.train_state import TrainState
 import orbax.checkpoint as ocp
 
-from Craftax_Baselines.models.actor_critic import ActorCriticConv, ActorCritic
+from ..models.actor_critic import ActorCriticConv, ActorCritic
 
 
 def main(args):

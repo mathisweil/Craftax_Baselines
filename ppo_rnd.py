@@ -15,14 +15,14 @@ from typing import NamedTuple
 from flax.training.train_state import TrainState
 import orbax.checkpoint as ocp
 
-from Craftax_Baselines.logz.batch_logging import batch_log, create_log_dict
-from Craftax_Baselines.wrappers import (
+from logz.batch_logging import batch_log, create_log_dict
+from wrappers import (
     LogWrapper,
     OptimisticResetVecEnvWrapper,
     AutoResetEnvWrapper,
     BatchEnvWrapper,
 )
-from Craftax_Baselines.models.rnd import RNDNetwork, ActorCriticRND
+from models.rnd import RNDNetwork, ActorCriticRND
 
 # Code adapted from the original implementation made by Chris Lu
 # Original code located at https://github.com/luchris429/purejaxrl
